@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homePageScreen"
+        android:icon="@drawable/home"
+        android:title="Anasayfa" />
+
+    <item
+        android:id="@+id/commPageScreen"
+        android:icon="@drawable/communication"
+        android:title="İletişim" />
+    <item
+        android:id="@+id/toolsPageScreen"
+        android:icon="@drawable/tools"
+        android:title="Araçlar" />
+</menu>

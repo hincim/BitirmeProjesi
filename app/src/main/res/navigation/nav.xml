@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/homePageScreen">
+
+    <fragment
+        android:id="@+id/homePageScreen"
+        android:name="com.example.muhendisliktasarimi.view.HomePageScreen"
+        android:label="fragment_home_page_screen"
+        tools:layout="@layout/fragment_home_page_screen" />
+    <fragment
+        android:id="@+id/commPageScreen"
+        android:name="com.example.muhendisliktasarimi.view.CommPageScreen"
+        android:label="fragment_comm_page_screen"
+        tools:layout="@layout/fragment_comm_page_screen" />
+    <fragment
+        android:id="@+id/toolsPageScreen"
+        android:name="com.example.muhendisliktasarimi.view.ToolsPageScreen"
+        android:label="fragment_tools_page_screen"
+        tools:layout="@layout/fragment_tools_page_screen" />
+</navigation>
