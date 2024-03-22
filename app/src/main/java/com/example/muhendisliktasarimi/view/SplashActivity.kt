@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         ObjectAnimator.ofFloat(binding.imageView,"rotationY",0.0f,-360.0f).apply {
-            duration = 500
+            duration = 600
 
         }.start()
 

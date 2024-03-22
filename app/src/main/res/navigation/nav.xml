@@ -9,7 +9,15 @@
         android:id="@+id/homePageScreen"
         android:name="com.example.muhendisliktasarimi.view.HomePageScreen"
         android:label="fragment_home_page_screen"
-        tools:layout="@layout/fragment_home_page_screen" />
+        tools:layout="@layout/fragment_home_page_screen" >
+        <action
+            android:id="@+id/action_homePageScreen_to_wordAddFragment"
+            app:destination="@id/wordAddFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/enter_animation"
+            app:popEnterAnim="@anim/exit_animation"
+            app:popExitAnim="@anim/exit_animation" />
+    </fragment>
     <fragment
         android:id="@+id/commPageScreen"
         android:name="com.example.muhendisliktasarimi.view.CommPageScreen"
@@ -20,4 +28,9 @@
         android:name="com.example.muhendisliktasarimi.view.ToolsPageScreen"
         android:label="fragment_tools_page_screen"
         tools:layout="@layout/fragment_tools_page_screen" />
+    <fragment
+        android:id="@+id/wordAddFragment"
+        android:name="com.example.muhendisliktasarimi.view.WordAddFragment"
+        android:label="fragment_word_add"
+        tools:layout="@layout/fragment_word_add" />
 </navigation>
