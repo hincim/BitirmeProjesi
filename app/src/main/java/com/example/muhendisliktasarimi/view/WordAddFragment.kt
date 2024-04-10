@@ -19,11 +19,6 @@ class WordAddFragment : Fragment(R.layout.fragment_word_add) {
     private var _fragmentBinding: FragmentWordAddBinding? = null
     private lateinit var viewModel: WordsViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentWordAddBinding.bind(view)

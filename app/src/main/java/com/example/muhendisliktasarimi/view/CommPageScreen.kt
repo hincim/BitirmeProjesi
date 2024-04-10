@@ -21,5 +21,4 @@ class CommPageScreen : Fragment() {
         return _comePageScreen.root
     }
 
-
 }
