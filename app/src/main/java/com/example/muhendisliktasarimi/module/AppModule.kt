@@ -1,9 +1,21 @@
 package com.example.muhendisliktasarimi.module
 
+import com.example.muhendisliktasarimi.data.remote.dto.MovieAPI
 import com.example.muhendisliktasarimi.data.remote.dto.TdkAPI
+import com.example.muhendisliktasarimi.data.remote.dto.TranslationAPI
+import com.example.muhendisliktasarimi.data.remote.dto.WeatherAPI
+import com.example.muhendisliktasarimi.data.repo.MovieRepoImpl
 import com.example.muhendisliktasarimi.data.repo.TdkRepoImpl
+import com.example.muhendisliktasarimi.data.repo.TranslateRepoImpl
+import com.example.muhendisliktasarimi.data.repo.WeatherRepoImpl
+import com.example.muhendisliktasarimi.domain.repo.MovieRepo
 import com.example.muhendisliktasarimi.domain.repo.TdkRepo
+import com.example.muhendisliktasarimi.domain.repo.TranslateRepo
+import com.example.muhendisliktasarimi.domain.repo.WeatherRepo
+import com.example.muhendisliktasarimi.util.Constants.MOVIE_BASE_URL
 import com.example.muhendisliktasarimi.util.Constants.TDK_BASE_URL
+import com.example.muhendisliktasarimi.util.Constants.TRANSLATE_BASE_URL
+import com.example.muhendisliktasarimi.util.Constants.WEATHER_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +29,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+
+    @Provides
+    @Singleton
+    fun provideWeatherApi() : WeatherAPI {
+
+        return Retrofit.Builder()
+            .baseUrl(WEATHER_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(WeatherAPI::class.java)
+    }
     @Provides
     @Singleton
     fun provideTdkApi() : TdkAPI {
@@ -27,9 +50,52 @@ object AppModule {
             .build()
             .create(TdkAPI::class.java)
     }
+    @Provides
+    @Singleton
+    fun provideMovieApi() : MovieAPI {
+
+        return Retrofit.Builder()
+            .baseUrl(MOVIE_BASE_URL)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(MovieAPI::class.java)
+    }
+
+
+        @Provides
+        @Singleton
+        fun provideTranslationService(): TranslationAPI {
+            return Retrofit.Builder()
+                .baseUrl(TRANSLATE_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(TranslationAPI::class.java)
+        }
 
     @Singleton
     @Provides
     fun injectRepo(api: TdkAPI) = TdkRepoImpl(api) as TdkRepo
+
+
+    @Provides
+    @Singleton
+    fun provideWeatherRepository(api: WeatherAPI): WeatherRepo {
+
+        return WeatherRepoImpl(api)
+    }
+    @Provides
+    @Singleton
+    fun provideMovieRepository(api: MovieAPI): MovieRepo {
+
+        return MovieRepoImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTranslateRepository(api: TranslationAPI): TranslateRepo {
+
+        return TranslateRepoImpl(api)
+    }
 
 }

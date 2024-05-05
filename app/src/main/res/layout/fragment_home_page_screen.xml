@@ -6,20 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".view.HomePageScreen">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            app:titleCentered="true"
-            app:title="Kelimelerini Ara"
-            app:titleTextColor="@color/white"
-            android:elevation="10dp"
-            android:layout_height="wrap_content"
-            android:background="@color/teal_700"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="10dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Kelimelerini Ara"
+        app:titleCentered="true"
+        app:titleTextColor="@color/teal_700" >
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
@@ -34,13 +35,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
-        android:layout_width="406dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:elevation="100dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        app:cardBackgroundColor="#009688"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardPreventCornerOverlap="false"
@@ -50,6 +49,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/card_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="10dp">

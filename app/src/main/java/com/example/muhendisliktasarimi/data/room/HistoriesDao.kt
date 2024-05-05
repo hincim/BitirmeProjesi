@@ -15,4 +15,5 @@ interface HistoriesDao {
     suspend fun deleteHistory(history: Histories)
     @Query("DELETE FROM Histories")
     suspend fun deleteAllHistory()
+
 }

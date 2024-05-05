@@ -26,7 +26,7 @@ class MeanAdapter(private val viewModel: TdkViewModel, var means:ArrayList<TdkDt
         for ((index, value) in means[position].withIndex()){
             for ((i) in value.anlamlarListe){
                 mean += "$i.\n\n"
-                holder.binding.textViewMean.text = "${viewModel.searchName.value} \n$mean"
+                holder.binding.textViewMean.text = "$mean"
             }
         }
     }

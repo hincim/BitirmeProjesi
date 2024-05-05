@@ -23,20 +23,18 @@ class WordAddFragment : Fragment(R.layout.fragment_word_add) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentWordAddBinding.bind(view)
         _fragmentBinding = binding
-
         ObjectAnimator.ofFloat(binding.welcomeBack,"alpha",-3.0f,1.0f).apply {
             duration = 1000
         }.start()
 
         viewModel = ViewModelProvider(requireActivity())[WordsViewModel::class.java]
-
-        binding.fabBack.setOnClickListener {
+/*
+            binding.fabBack.setOnClickListener {
             findNavController().popBackStack()
-        }
-
-        binding.buttonSave.setOnClickListener {
-            val eng = binding.editTextEng.text.toString()
-            val tr = binding.editTextTurkish.text.toString()
+        }*/
+         binding.buttonSave.setOnClickListener {
+                 val eng = binding.editTextEng.text.toString().trim()
+            val tr = binding.editTextTr.text.toString().trim()
             if (eng.isEmpty() || tr.isEmpty()){
                 Toast.makeText(context,"Boş değer girilmemeli",Toast.LENGTH_SHORT).show()
             }else{
@@ -47,8 +45,8 @@ class WordAddFragment : Fragment(R.layout.fragment_word_add) {
                 Navigation.findNavController(it).popBackStack()
             }
         }
+        }
 
-    }
     override fun onDestroy() {
         _fragmentBinding = null
         super.onDestroy()

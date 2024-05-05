@@ -38,6 +38,11 @@ class WordsAdapter: RecyclerView.Adapter<WordsAdapter.WordsViewHolder>(){
     override fun onBindViewHolder(holder: WordsViewHolder, position: Int) {
        holder.binding.textViewEng.text = words[position].engWord
        holder.binding.textViewTr.text = words[position].trWord
+        println(words[position].uuid)
+
+        holder.binding.cardRow.setOnClickListener {
+            println(words[position].uuid)
+        }
     }
 
     override fun getItemCount(): Int {

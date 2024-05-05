@@ -90,4 +90,7 @@ dependencies {
     //Coroutine
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 
+    implementation ("com.airbnb.android:lottie:3.4.0")
+
+
 }

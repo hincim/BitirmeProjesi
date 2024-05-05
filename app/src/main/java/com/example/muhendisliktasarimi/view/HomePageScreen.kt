@@ -1,16 +1,15 @@
 package com.example.muhendisliktasarimi.view
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -71,6 +70,7 @@ class HomePageScreen : Fragment(R.layout.fragment_home_page_screen), SearchView.
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
         ItemTouchHelper(swipeCallBack).attachToRecyclerView(binding.rv)
 
+
         binding.card.setOnClickListener {
             Navigation.findNavController(it)
                 .navigate(HomePageScreenDirections.actionHomePageScreenToWordAddFragment())
@@ -80,7 +80,7 @@ class HomePageScreen : Fragment(R.layout.fragment_home_page_screen), SearchView.
 
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.word_search,menu)
+                menuInflater.inflate(R.menu.menu_search,menu)
                 val item = menu.findItem(R.id.action_search).actionView as SearchView
                 item.setOnQueryTextListener(this@HomePageScreen)
             }

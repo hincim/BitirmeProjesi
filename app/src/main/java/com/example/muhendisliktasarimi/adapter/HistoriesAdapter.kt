@@ -40,7 +40,7 @@ class HistoriesAdapter(
 
     override fun onBindViewHolder(holder: HistoriesViewHolder, position: Int) {
         val date = Date(histories[position].date)
-        holder.binding.textViewHistories.text = "${histories[position].pastName}\n ${date}"
+        holder.binding.textViewHistories.text = "${histories[position].pastName}\n${date}"
         holder.binding.imageViewDelete.setOnClickListener {
             viewModel.deleteHistory(histories[position])
         }

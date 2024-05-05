@@ -20,4 +20,10 @@ interface WordsDao {
 
     @Delete
     suspend fun deleteWords(words: Words)
+
+    @Query("SELECT * FROM Words ORDER BY RANDOM()")
+    suspend fun getRandomWords(): List<Words>
+
+    @Query("SELECT * FROM Words WHERE uuid != :uuid ORDER BY RANDOM() LIMIT 3")
+    suspend fun getRandomOptionsWord(uuid: Int): List<Words>
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.adapter.HistoriesAdapter
@@ -49,7 +50,7 @@ class WordMeanFragment : Fragment(R.layout.fragment_word_mean), SearchView.OnQue
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
 
-                menuInflater.inflate(R.menu.word_search,menu)
+                menuInflater.inflate(R.menu.menu_search,menu)
                 val item = menu.findItem(R.id.action_search).actionView as SearchView
                 item.setOnQueryTextListener(this@WordMeanFragment)
             }
@@ -98,6 +99,7 @@ class WordMeanFragment : Fragment(R.layout.fragment_word_mean), SearchView.OnQue
                     _fragmentBinding.progressBarMean.visibility = View.VISIBLE
                     _fragmentBinding.textViewNoData.visibility = View.GONE
                     _fragmentBinding.textViewTitle.visibility = View.GONE
+                    _fragmentBinding.recyclerView.visibility = View.GONE
                 }else if (data.error == "Error"){
                     _fragmentBinding.textViewNoData.visibility = View.VISIBLE
                     _fragmentBinding.recyclerView.visibility = View.GONE

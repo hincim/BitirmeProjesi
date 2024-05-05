@@ -11,17 +11,17 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_means"
             android:layout_width="0dp"
-            app:titleCentered="true"
-            app:title="Kelime Ara"
-            app:titleTextColor="@color/white"
-            android:elevation="10dp"
             android:layout_height="wrap_content"
-            android:background="@color/teal_700"
+            android:background="@color/white"
+            android:elevation="10dp"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Kelime Ara"
+            app:titleCentered="true"
+            app:titleTextColor="@color/teal_700" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"

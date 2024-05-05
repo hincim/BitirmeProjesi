@@ -22,6 +22,14 @@ class ToolsPageScreen : Fragment() {
         _toolsPageScreen.cardMean.setOnClickListener {
             findNavController().navigate(ToolsPageScreenDirections.actionToolsPageScreenToFragmentWordMeanFragment(""))
         }
+
+        _toolsPageScreen.cardWeather.setOnClickListener {
+            findNavController().navigate(ToolsPageScreenDirections.actionToolsPageScreenToWeatherInfoFragment())
+        }
+
+        _toolsPageScreen.cardMovie.setOnClickListener {
+            findNavController().navigate(ToolsPageScreenDirections.actionToolsPageScreenToMovieFragment())
+        }
         return _toolsPageScreen.root
     }
 }
