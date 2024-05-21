@@ -18,11 +18,11 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         ObjectAnimator.ofFloat(binding.imageView,"rotationY",0.0f,-360.0f).apply {
-            duration = 600
+            duration = 400
 
         }.start()
 
-        object : CountDownTimer(2000,1000){
+        object : CountDownTimer(700,400){
             override fun onTick(p0: Long) {
 
             }
