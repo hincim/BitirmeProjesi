@@ -24,6 +24,9 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
         arguments?.let {
 
             viewModel.getMovieDetail(MovieDetailFragmentArgs.fromBundle(it).movieId)
+            binding.progressBarMovieDetail.visibility = View.VISIBLE
+            binding.cardViewFilm.visibility = View.GONE
+
         }
 
         viewModel.state.observe(viewLifecycleOwner, Observer {

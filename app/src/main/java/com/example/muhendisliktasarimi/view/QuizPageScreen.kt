@@ -29,6 +29,9 @@ class QuizPageScreen : Fragment() {
         _fragmentBinding.cardViewSolveQuestion.setOnClickListener {
             startActivity(Intent(requireContext(), SolveQuestionActivity::class.java))
         }
+        _fragmentBinding.cardViewScoreTable.setOnClickListener {
+            startActivity(Intent(requireContext(), FeedActivity::class.java))
+        }
         return _fragmentBinding.root
     }
 

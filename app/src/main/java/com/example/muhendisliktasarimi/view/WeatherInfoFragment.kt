@@ -53,19 +53,11 @@ class WeatherInfoFragment : Fragment(R.layout.fragment_weather_info), SearchView
 
 
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[WeatherViewModel::class.java]
 
         getData()
-
-
         _fragmentBinding.swipeRefreshLayout.setOnRefreshListener {
             _fragmentBinding.progressBar.visibility = View.VISIBLE
             _fragmentBinding.textViewErr.visibility = View.GONE

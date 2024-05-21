@@ -3,6 +3,7 @@ package com.example.muhendisliktasarimi.view
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.animation.OvershootInterpolator
 import android.widget.Button
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.muhendisliktasarimi.MainActivity
@@ -17,13 +19,22 @@ import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.databinding.ActivitySolveQuestionBinding
 import com.example.muhendisliktasarimi.domain.model.Words
 import com.example.muhendisliktasarimi.viewmodel.WordsViewModel
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.runBlocking
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class SolveQuestionActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySolveQuestionBinding
     private lateinit var viewModel: WordsViewModel
-
+    private lateinit var auth: FirebaseAuth
+    private lateinit var fireStore: FirebaseFirestore
     private lateinit var questions : Deferred<List<Words>>
     private var questionsSize = 0
     private lateinit var falseOptions: List<Words>
@@ -36,13 +47,21 @@ class SolveQuestionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySolveQuestionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        auth = Firebase.auth
+        fireStore = Firebase.firestore
         viewModel = ViewModelProvider(this)[WordsViewModel::class.java]
 
         questions = viewModel.getRandomWord()
         allOptions = HashSet()
 
         uploadQuestion()
+        val username = auth.currentUser?.email?.substringBefore('@')
+        binding.textViewUserName.text = "Kullanıcı adı: "+username
+
+        ObjectAnimator.ofFloat(binding.textViewUserName,"translationY",-1500.0f, 0.0f).apply {
+            duration = 1000
+
+        }.start()
 
         ObjectAnimator.ofFloat(binding.buttonAnswer1,"translationX",1500.0f, 0.0f).apply {
             duration = 1000
@@ -66,6 +85,11 @@ class SolveQuestionActivity : AppCompatActivity() {
         }.start()
 
         binding.buttonAnswer1.setOnClickListener {
+
+            closeButton(it)
+            closeButton(binding.buttonAnswer2)
+            closeButton(binding.buttonAnswer3)
+            closeButton(binding.buttonAnswer4)
 
             val value = correctControl(binding.buttonAnswer1)
             if (value){
@@ -97,6 +121,10 @@ class SolveQuestionActivity : AppCompatActivity() {
 
         }
         binding.buttonAnswer2.setOnClickListener {
+            closeButton(binding.buttonAnswer1)
+            closeButton(it)
+            closeButton(binding.buttonAnswer3)
+            closeButton(binding.buttonAnswer4)
 
             val value = correctControl(binding.buttonAnswer2)
             if (value){
@@ -128,7 +156,10 @@ class SolveQuestionActivity : AppCompatActivity() {
 
         }
         binding.buttonAnswer3.setOnClickListener {
-
+            closeButton(binding.buttonAnswer1)
+            closeButton(binding.buttonAnswer2)
+            closeButton(it)
+            closeButton(binding.buttonAnswer4)
             val value = correctControl(binding.buttonAnswer3)
             if (value){
                 it.setBackgroundResource(R.drawable.rounded_button_green)
@@ -159,6 +190,10 @@ class SolveQuestionActivity : AppCompatActivity() {
 
         }
         binding.buttonAnswer4.setOnClickListener {
+            closeButton(binding.buttonAnswer1)
+            closeButton(binding.buttonAnswer2)
+            closeButton(binding.buttonAnswer3)
+            closeButton(it)
 
             val value = correctControl(binding.buttonAnswer4)
             if (value){
@@ -197,7 +232,10 @@ class SolveQuestionActivity : AppCompatActivity() {
         binding.buttonAnswer2.setBackgroundResource(R.drawable.rounded_button)
         binding.buttonAnswer3.setBackgroundResource(R.drawable.rounded_button)
         binding.buttonAnswer4.setBackgroundResource(R.drawable.rounded_button)
-
+        openButton(binding.buttonAnswer1)
+        openButton(binding.buttonAnswer2)
+        openButton(binding.buttonAnswer3)
+        openButton(binding.buttonAnswer4)
         binding.questionCount.text = "${questionCounter+1}. Soru"
 
         runBlocking {
@@ -263,6 +301,7 @@ class SolveQuestionActivity : AppCompatActivity() {
             }
         })*/
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun questionCountControl(view: View){
 
         questionCounter ++
@@ -270,7 +309,10 @@ class SolveQuestionActivity : AppCompatActivity() {
         if (questionCounter != questionsSize){
             uploadQuestion()
         }else{
+            ObjectAnimator.ofFloat(binding.textViewUserName,"translationY",0.0f, -1500.0f).apply {
+                duration = 1000
 
+            }.start()
             ObjectAnimator.ofFloat(binding.buttonAnswer1,"translationX", 0.0f, 1500.0f).apply {
                 duration = 700
                 interpolator  = OvershootInterpolator()
@@ -296,6 +338,16 @@ class SolveQuestionActivity : AppCompatActivity() {
                 }
 
                 override fun onFinish() {
+                    val currentDateTime = LocalDateTime.now()
+                    val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+                    val formattedDateTime = currentDateTime.format(formatter)
+                    val scoreMap = hashMapOf<String, Any>()
+                    scoreMap.put("score","% ${(correctCounter * 100)/questionsSize} Başarı")
+                    scoreMap.put("userEmail",auth.currentUser?.email.toString())
+                    scoreMap.put("date", formattedDateTime)
+                    fireStore.collection("Score").add(scoreMap).addOnSuccessListener {
+                        Toast.makeText(this@SolveQuestionActivity,"Skor kaydedildi",Toast.LENGTH_SHORT).show()
+                    }
                     val intent = Intent(this@SolveQuestionActivity,ResultActivity::class.java)
                     intent.putExtra("correctCounter",correctCounter)
                     intent.putExtra("questionSize",questionsSize)
@@ -327,5 +379,12 @@ class SolveQuestionActivity : AppCompatActivity() {
                 return false
             }
 
+    }
+
+    private fun closeButton(button: View){
+        button.isEnabled = false
+    }
+    private fun openButton(button: Button){
+        button.isEnabled = true
     }
 }
