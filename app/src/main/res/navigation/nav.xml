@@ -148,9 +148,4 @@
 
 
     </fragment>
-    <fragment
-        android:id="@+id/dictionaryPageScreen"
-        android:name="com.example.muhendisliktasarimi.view.DictionaryPageScreen"
-        android:label="fragment_dictionary_page_screen"
-        tools:layout="@layout/fragment_dictionary_page_screen" />
 </navigation>

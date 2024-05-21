@@ -3,17 +3,11 @@ package com.example.muhendisliktasarimi.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.example.muhendisliktasarimi.R
-import com.example.muhendisliktasarimi.databinding.ActivityFeedBinding
 import com.example.muhendisliktasarimi.databinding.ScoreRowBinding
 import com.example.muhendisliktasarimi.databinding.UserScoreGroupBinding
 import com.example.muhendisliktasarimi.domain.model.GroupedScore
-import com.example.muhendisliktasarimi.domain.model.Score
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 class ScoreAdapter(private val groupedScoreList: List<GroupedScore>): RecyclerView.Adapter<ScoreAdapter.RvViewHolder>() {
 

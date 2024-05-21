@@ -10,17 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.muhendisliktasarimi.adapter.ScoreAdapter
 import com.example.muhendisliktasarimi.databinding.ActivityFeedBinding
 import com.example.muhendisliktasarimi.domain.model.GroupedScore
-import com.example.muhendisliktasarimi.domain.model.Score
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.util.Date
 
 class FeedActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFeedBinding

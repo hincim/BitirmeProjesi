@@ -5,8 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface TdkAPI {
-
-
     @GET("gts")
     suspend fun getWordMean(
         @Query("ara") searchQuery : String

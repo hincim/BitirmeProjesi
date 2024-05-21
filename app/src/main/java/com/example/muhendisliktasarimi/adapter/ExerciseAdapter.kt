@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -19,6 +20,7 @@ import com.example.muhendisliktasarimi.databinding.ItemWordRowBinding
 import com.example.muhendisliktasarimi.databinding.ItemWordcardsRowBinding
 import com.example.muhendisliktasarimi.domain.model.Words
 import com.example.muhendisliktasarimi.state.MoviesState
+import com.example.muhendisliktasarimi.view.SignInActivity
 import java.util.Locale
 
 class ExerciseAdapter: RecyclerView.Adapter<ExerciseAdapter.CardViewHolder>() {
@@ -52,7 +54,18 @@ class ExerciseAdapter: RecyclerView.Adapter<ExerciseAdapter.CardViewHolder>() {
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.binding.textViewTr.text = words[position].trWord
         holder.binding.textViewEng.text = words[position].engWord
-        holder.binding.imageViewSound.setOnClickListener {
+        holder.binding.imageButtonSound.setOnClickListener {
+            it.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.rounded_corner2)
+            object : CountDownTimer(200,100){
+                override fun onTick(p0: Long) {
+
+                }
+
+                override fun onFinish() {
+                    it.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.rounded_corner)
+                }
+
+            }.start()
             tts = TextToSpeech(holder.itemView.context, TextToSpeech.OnInitListener {
                 if (it == TextToSpeech.SUCCESS){
                     tts.language = Locale.US
