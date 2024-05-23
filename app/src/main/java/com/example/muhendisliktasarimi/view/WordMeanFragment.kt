@@ -52,6 +52,7 @@ class WordMeanFragment : Fragment(R.layout.fragment_word_mean), SearchView.OnQue
 
                 menuInflater.inflate(R.menu.menu_search,menu)
                 val item = menu.findItem(R.id.action_search).actionView as SearchView
+                item.queryHint = "Türkçe kelime"
                 item.setOnQueryTextListener(this@WordMeanFragment)
             }
 

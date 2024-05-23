@@ -236,13 +236,14 @@ class SolveQuestionActivity : AppCompatActivity() {
         openButton(binding.buttonAnswer2)
         openButton(binding.buttonAnswer3)
         openButton(binding.buttonAnswer4)
-        binding.questionCount.text = "${questionCounter+1}. Soru"
 
         runBlocking {
             correctQuestion = questions.await()[questionCounter]
             questionsSize = questions.await().size
             falseOptions = viewModel.getRandomOptionsWord(correctQuestion.uuid).await()
         }
+        binding.questionCount.text = "${questionCounter+1}/${questionsSize}"
+
         binding.textViewQuestion.text = correctQuestion.engWord
         allOptions = HashSet()
         allOptions.add(correctQuestion)

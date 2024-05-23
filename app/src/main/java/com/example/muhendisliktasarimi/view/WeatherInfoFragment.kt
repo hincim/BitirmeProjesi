@@ -41,6 +41,7 @@ class WeatherInfoFragment : Fragment(R.layout.fragment_weather_info), SearchView
 
                 menuInflater.inflate(R.menu.menu_search,menu)
                 val item = menu.findItem(R.id.action_search).actionView as SearchView
+                item.queryHint = "Şehir ismi"
                 item.setOnQueryTextListener(this@WeatherInfoFragment)
             }
 

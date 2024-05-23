@@ -43,6 +43,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie), SearchView.OnQueryTextL
 
                 menuInflater.inflate(R.menu.menu_search,menu)
                 val item = menu.findItem(R.id.action_search).actionView as SearchView
+                item.queryHint = "Film veya dizi ismi"
                 item.setOnQueryTextListener(this@MovieFragment)
             }
 

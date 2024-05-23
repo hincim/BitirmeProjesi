@@ -34,7 +34,13 @@ class SignInActivity : AppCompatActivity() {
                 binding.textViewSignUp.visibility = View.GONE
                 firebaseAuth.signInWithEmailAndPassword(email,password)
                     .addOnFailureListener {
-                        Toast.makeText(this,"Hata", Toast.LENGTH_SHORT).show()
+                        if (it.message == "The email address is badly formatted."){
+                            Toast.makeText(this,"Geçerli bir email adresi girin", Toast.LENGTH_SHORT).show()
+                        }else if (it.message == "The supplied auth credential is incorrect, malformed or has expired."){
+                            Toast.makeText(this,"Kullanıcı adı veya şifre hatalı", Toast.LENGTH_SHORT).show()
+                        }else{
+                            Toast.makeText(this,"Hata", Toast.LENGTH_SHORT).show()
+                        }
                         binding.linearLayout.visibility = View.VISIBLE
                         binding.textViewSignUp.visibility = View.VISIBLE
                         binding.progressBar2.visibility = View.GONE
@@ -48,9 +54,12 @@ class SignInActivity : AppCompatActivity() {
                         finish()
                     }else if (it.exception!!.message == "The email address is badly formatted."){
                         Toast.makeText(this,"Geçerli bir email adresi girin", Toast.LENGTH_SHORT).show()
+                        binding.linearLayout.visibility = View.VISIBLE
+                        binding.textViewSignUp.visibility = View.VISIBLE
                     }else if (it.exception!!.message == "The supplied auth credential is incorrect, malformed or has expired."){
                         Toast.makeText(this,"Kullanıcı adı veya şifre hatalı", Toast.LENGTH_SHORT).show()
-
+                        binding.linearLayout.visibility = View.VISIBLE
+                        binding.textViewSignUp.visibility = View.VISIBLE
                     }else{
                         Toast.makeText(this,"Hata", Toast.LENGTH_SHORT).show()
                         binding.linearLayout.visibility = View.VISIBLE

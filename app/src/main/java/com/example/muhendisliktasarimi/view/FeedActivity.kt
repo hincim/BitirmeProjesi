@@ -13,6 +13,7 @@ import com.example.muhendisliktasarimi.domain.model.GroupedScore
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -42,17 +43,19 @@ class FeedActivity : AppCompatActivity() {
         binding.progressBarFeed.visibility = View.VISIBLE
         binding.rv.visibility = View.GONE
         db.collection("Score")
-            .orderBy("date")
+            .orderBy("date",Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 binding.progressBarFeed.visibility = View.GONE
                 binding.rv.visibility = View.VISIBLE
                 val groupedScoresMap = mutableMapOf<String, MutableList<Pair<String, String>>>()
                 for (document in documents) {
-                    val email = document.getString("userEmail") ?: ""
+                    var email = document.getString("userEmail") ?: ""
                     val date = document.getString("date") ?: ""
                     val score = document.getString("score") ?: ""
-
+                    if (email == auth.currentUser?.email){
+                        email = "Siz"
+                    }
                     val scoresList = groupedScoresMap.getOrPut(email) { mutableListOf() }
                     scoresList.add(Pair(date, score))
                 }
