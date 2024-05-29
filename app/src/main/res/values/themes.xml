@@ -19,7 +19,22 @@
 
     </style>
 
+ <style name="searchView">
 
+     <item name="android:editTextColor">@color/black</item>
+     <item name="android:textColorHint">#80000000</item>
+ </style>
+
+
+    <style name="searchView2">
+
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColorHint">#A6000000</item>
+    </style>
+
+    <style name="progressTheme">
+        <item name="android:indeterminateTint">@color/white</item>
+    </style>
 
     <style name="Base.Theme.MuhendislikTasarimi.NoActionBar">
         <item name="windowActionBar">false</item>

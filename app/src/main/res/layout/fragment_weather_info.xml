@@ -15,7 +15,7 @@
             android:background="@color/white"
             android:elevation="10dp"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
+            android:theme="@style/searchView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -66,6 +66,7 @@
                         android:padding="60dp">
 
                         <ProgressBar
+                            android:theme="@style/progressTheme"
                             android:id="@+id/progressBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
