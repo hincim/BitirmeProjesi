@@ -6,7 +6,7 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">#A4A3A6</item>
+        <item name="colorPrimary">#858487</item>
         <item name="colorPrimaryVariant">#A4A3A6</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -16,6 +16,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="fontFamily">@font/font3</item>
+
 
     </style>
 

@@ -82,6 +82,7 @@ class HomePageScreen : Fragment(R.layout.fragment_home_page_screen), SearchView.
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_search,menu)
                 val item = menu.findItem(R.id.action_search).actionView as SearchView
+                item.queryHint = "Kelime ara"
                 item.setOnQueryTextListener(this@HomePageScreen)
             }
 

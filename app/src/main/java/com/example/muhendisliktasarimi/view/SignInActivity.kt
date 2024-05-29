@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.muhendisliktasarimi.MainActivity
 import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.databinding.ActivitySignInBinding
@@ -19,6 +20,10 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.emailLayout.boxStrokeColor = ContextCompat.getColor(this, R.color.black)
+        binding.passwordLayout.boxStrokeColor = ContextCompat.getColor(this, R.color.black)
+
 
         firebaseAuth = FirebaseAuth.getInstance()
         binding.textViewSignUp.setOnClickListener {

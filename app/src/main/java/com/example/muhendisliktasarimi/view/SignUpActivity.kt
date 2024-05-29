@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.muhendisliktasarimi.MainActivity
 import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.databinding.ActivitySignUpBinding
@@ -19,6 +20,10 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.emailLayout.boxStrokeColor = ContextCompat.getColor(this, R.color.black)
+        binding.passwordLayout.boxStrokeColor = ContextCompat.getColor(this, R.color.black)
+        binding.passwordAgainLayout.boxStrokeColor = ContextCompat.getColor(this, R.color.black)
 
         firebaseAuth = FirebaseAuth.getInstance()
 

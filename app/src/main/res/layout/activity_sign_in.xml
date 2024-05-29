@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:elevation="10dp"
                 android:layout_marginHorizontal="5dp"
+                android:textColorHint="@color/black"
                 android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -41,7 +42,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email_input"
-                    android:padding="10dp"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
@@ -53,7 +54,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
+                android:textColorHint="@color/black"
                 android:layout_marginTop="24dp"
+                app:passwordToggleTint="@color/black"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -63,7 +66,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_input"
-
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Şifre"
