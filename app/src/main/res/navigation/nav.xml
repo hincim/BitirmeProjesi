@@ -14,8 +14,6 @@
             android:id="@+id/action_homePageScreen_to_wordAddFragment"
             app:destination="@id/wordAddFragment"
             app:enterAnim="@anim/enter_animation"
-            app:exitAnim="@anim/enter_animation"
-            app:popEnterAnim="@anim/exit_animation"
             app:popExitAnim="@anim/exit_animation" />
     </fragment>
     <fragment
@@ -32,19 +30,16 @@
             android:id="@+id/action_toolsPageScreen_to_fragmentWordMeanFragment"
             app:destination="@id/wordMeanFragment"
             app:enterAnim="@anim/enter_animation"
-            app:popEnterAnim="@anim/exit_animation"
             app:popExitAnim="@anim/exit_animation" />
         <action
             android:id="@+id/action_toolsPageScreen_to_weatherInfoFragment"
             app:destination="@id/weatherInfoFragment"
             app:enterAnim="@anim/enter_animation"
-            app:popEnterAnim="@anim/exit_animation"
             app:popExitAnim="@anim/exit_animation" />
         <action
             android:id="@+id/action_toolsPageScreen_to_movieFragment"
             app:destination="@id/movieFragment"
             app:enterAnim="@anim/enter_animation"
-            app:popEnterAnim="@anim/exit_animation"
             app:popExitAnim="@anim/exit_animation" />
     </fragment>
     <fragment
@@ -60,7 +55,6 @@
             android:id="@+id/action_wordMeanFragment_to_historiesFragment"
             app:destination="@id/historiesFragment"
             app:enterAnim="@anim/enter_animation"
-            app:popEnterAnim="@anim/exit_animation"
             app:popExitAnim="@anim/exit_animation"
             app:popUpTo="@id/wordMeanFragment" />
         <argument
@@ -75,7 +69,6 @@
             android:id="@+id/action_historiesFragment_to_wordMeanFragment"
             app:destination="@id/wordMeanFragment"
             app:enterAnim="@anim/enter_animation"
-            app:popEnterAnim="@anim/exit_animation"
             app:popExitAnim="@anim/exit_animation"
             app:popUpTo="@id/wordMeanFragment"
             app:popUpToInclusive="true" />
@@ -93,7 +86,6 @@
             android:id="@+id/action_movieFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment"
             app:enterAnim="@anim/enter_animation"
-            app:popEnterAnim="@anim/exit_animation"
             app:popExitAnim="@anim/exit_animation" />
     </fragment>
     <fragment
@@ -118,9 +110,8 @@
         <action
             android:id="@+id/action_quizPageScreen_to_exercisePageScreen"
             app:destination="@id/exercisePageScreen"
-            app:enterAnim="@anim/enter_animation"
-            app:popEnterAnim="@anim/exit_animation"
-            app:popExitAnim="@anim/exit_animation" />
+            app:enterAnim="@anim/enter_y_animation"
+            app:popExitAnim="@anim/exit_y_animation" />
         <action
             android:id="@+id/action_quizPageScreen_to_solveQuestionFragment"
             app:destination="@id/solveQuestionFragment"

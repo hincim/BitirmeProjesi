@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_search2"
         android:title="Arama yap..."
-        android:icon="@drawable/search2"
+        android:icon="@drawable/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always|collapseActionView"/>
 </menu>

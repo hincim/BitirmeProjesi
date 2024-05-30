@@ -23,7 +23,7 @@
             android:id="@+id/toolbar_movie"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/card_background"
             android:elevation="10dp"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/searchView"
@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="Film Ara"
             app:titleCentered="true"
-            app:titleTextColor="@color/teal_700" />
+            app:titleTextColor="@color/white" />
 
         <ProgressBar
             android:id="@+id/progressBarMovie"

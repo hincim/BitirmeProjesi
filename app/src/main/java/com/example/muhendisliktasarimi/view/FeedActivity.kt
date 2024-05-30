@@ -55,6 +55,8 @@ class FeedActivity : AppCompatActivity() {
                     val score = document.getString("score") ?: ""
                     if (email == auth.currentUser?.email){
                         email = "Siz"
+                    }else{
+                        email = "Kullanıcı Adı: $email"
                     }
                     val scoresList = groupedScoresMap.getOrPut(email) { mutableListOf() }
                     scoresList.add(Pair(date, score))

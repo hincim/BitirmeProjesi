@@ -13,7 +13,7 @@
         android:background="@drawable/card_background"
         android:elevation="10dp"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/searchView2"
+        android:theme="@style/searchView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
