@@ -28,7 +28,7 @@ class MovieViewModel @Inject constructor(
 
 
     init {
-        getMovies("harry")
+        getMovies("Ayla")
     }
 
     private fun getMovies(search:String){

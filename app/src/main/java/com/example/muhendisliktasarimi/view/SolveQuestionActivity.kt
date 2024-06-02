@@ -343,7 +343,7 @@ class SolveQuestionActivity : AppCompatActivity() {
                     val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
                     val formattedDateTime = currentDateTime.format(formatter)
                     val scoreMap = hashMapOf<String, Any>()
-                    scoreMap.put("score","% ${(correctCounter * 100)/questionsSize} Başarı")
+                    scoreMap.put("score","${(correctCounter * 100)/questionsSize}")
                     scoreMap.put("userEmail",auth.currentUser?.email.toString())
                     scoreMap.put("date", formattedDateTime)
                     fireStore.collection("Score").add(scoreMap).addOnSuccessListener {

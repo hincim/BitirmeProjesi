@@ -7,5 +7,5 @@ data class MoviesState(
     val isLoading: Boolean = false,
     val movies: List<Movie> = emptyList(),
     val error: String = "",
-    val search: String = "harry potter"
+    val search: String = "Ayla"
 )

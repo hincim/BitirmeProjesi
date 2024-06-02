@@ -43,7 +43,6 @@ class FeedActivity : AppCompatActivity() {
         binding.progressBarFeed.visibility = View.VISIBLE
         binding.rv.visibility = View.GONE
         db.collection("Score")
-            .orderBy("date",Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 binding.progressBarFeed.visibility = View.GONE
@@ -58,7 +57,8 @@ class FeedActivity : AppCompatActivity() {
                     }else{
                         email = "Kullanıcı Adı: $email"
                     }
-                    val scoresList = groupedScoresMap.getOrPut(email) { mutableListOf() }
+                    val scoresList = groupedScoresMap
+                        .getOrPut(email) { mutableListOf() }
                     scoresList.add(Pair(date, score))
                 }
 
