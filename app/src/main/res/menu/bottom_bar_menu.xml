@@ -15,7 +15,7 @@
         android:title="Alıştırma Yap" />
     <item
         android:id="@+id/toolsPageScreen"
-        android:icon="@drawable/tools"
+        android:icon="@drawable/tools_logo"
         android:title="Araçlar" />
 
     <item
