@@ -87,7 +87,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="devcraft.hinfo@gmail.com"
+                    android:text="hakanincim4@gmail.com"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
