@@ -6,31 +6,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/cardBackgroundColor"
+        android:clipToPadding="false">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_row"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/cardElevationColor">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/card_background">
+                android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="7dp"
+                    app:cardCornerRadius="10dp"
                     app:cardElevation="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="12dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -41,55 +45,51 @@
                             android:id="@+id/textViewTr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="18sp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="8dp"
-                            android:textColor="@android:color/black"
-                            android:textSize="24sp"
-                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.516">
-
-                        </TextView>
+                            app:layout_constraintVertical_bias="0.5"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/textViewEng"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="8dp"
-                            android:textColor="@android:color/black"
-                            android:textSize="24sp"
-                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.516">
-
-                        </TextView>
+                            app:layout_constraintVertical_bias="0.5" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <ImageButton
                     android:id="@+id/imageButtonSound"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/rounded_corner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/card"
-                    app:srcCompat="@drawable/sound" />
-
+                    app:layout_constraintTop_toBottomOf="@id/card"
+                    app:srcCompat="@drawable/sound"
+                    app:tint="@color/soundButtonColor"
+                    android:layout_marginBottom="16dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 </layout>

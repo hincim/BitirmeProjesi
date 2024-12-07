@@ -12,7 +12,7 @@
             android:id="@+id/toolbar_tools"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/card_background"
+            android:background="@drawable/button_gradient_home_page"
             android:elevation="10dp"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/searchView"

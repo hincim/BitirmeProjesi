@@ -12,7 +12,7 @@
             android:id="@+id/toolbar_means"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/card_background"
+            android:background="@drawable/button_gradient_home_page"
             android:elevation="10dp"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/searchView"
@@ -52,6 +52,8 @@
                 <ProgressBar
                     android:id="@+id/progressBarMean"
                     style="?android:attr/progressBarStyle"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/deepBlue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"

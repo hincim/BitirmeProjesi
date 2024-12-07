@@ -57,6 +57,17 @@ object AppModule {
             .create(MovieAPI::class.java)
     }
 
+//    @Provides
+//    @Singleton
+//    fun provideWordApi() : WordsAPI {
+//
+//        return Retrofit.Builder()
+//            .baseUrl(WORD_BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//            .create(WordsAPI::class.java)
+//    }
+
     @Singleton
     @Provides
     fun injectRepo(api: TdkAPI) = TdkRepoImpl(api) as TdkRepo
@@ -74,5 +85,12 @@ object AppModule {
 
         return MovieRepoImpl(api)
     }
+
+//    @Provides
+//    @Singleton
+//    fun provideWordsRepository(api: WordsAPI): WordsRepo {
+//
+//        return WordsRepoImpl(api)
+//    }
 
 }

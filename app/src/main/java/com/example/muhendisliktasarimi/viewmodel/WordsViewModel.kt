@@ -23,6 +23,7 @@ class WordsViewModel(application: Application): BaseViewModel(application) {
         words.value = wordsList
     }
 
+
     fun getDataFromSQLite(){
 
         launch {
@@ -43,6 +44,27 @@ class WordsViewModel(application: Application): BaseViewModel(application) {
             showWords(words)
         }
 
+    }
+
+    fun saveInSQLiteWord(words: Words){
+        launch {
+            val dao = AppDatabase(getApplication()).wordsDao()
+            if (!checkIfWordExists(words.engWord!!)){
+                dao.insert(words)
+                getDataFromSQLite()
+            }
+        }
+
+    }
+
+    fun clearAllWords() {
+       launch {
+            AppDatabase(getApplication()).wordsDao().deleteAllWords()
+           getDataFromSQLite()
+       }
+    }
+    suspend fun checkIfWordExists(word: String): Boolean {
+        return AppDatabase(getApplication()).wordsDao().getWordByEnglish(word) != null
     }
 
     fun getWordBySearch(word: String){

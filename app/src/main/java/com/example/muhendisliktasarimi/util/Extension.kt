@@ -27,7 +27,7 @@ fun ImageView.getImageMy(url: String?, progressDrawable: CircularProgressDrawabl
 
     val options = RequestOptions()
         .placeholder(progressDrawable)
-        .error(R.drawable.app_logo)
+        .error(R.drawable.app_logo_app)
 
     Glide.with(context)
         .setDefaultRequestOptions(options)

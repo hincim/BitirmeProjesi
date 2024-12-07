@@ -1,11 +1,13 @@
 package com.example.muhendisliktasarimi.view
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,10 +17,12 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.muhendisliktasarimi.MainActivity
 import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.adapter.ExerciseAdapter
 import com.example.muhendisliktasarimi.databinding.FragmentWordCardsBinding
 import com.example.muhendisliktasarimi.viewmodel.WordsViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class WordCardsFragment : Fragment(R.layout.fragment_word_cards) {
@@ -68,7 +72,12 @@ class WordCardsFragment : Fragment(R.layout.fragment_word_cards) {
         viewModel.getDataFromSQLite()
 
         viewModel.words.observe(viewLifecycleOwner, Observer {
-            it?.let {
+
+            if (it.isNullOrEmpty()) {
+                // If the words list is empty, navigate back or show a message
+                Snackbar.make(_fragmentBinding.root, "Kelime bulunamadı", Snackbar.LENGTH_SHORT).show()
+                requireActivity().onBackPressed() // Go back to the previous screen
+            } else {
                 adapter.words = it
             }
         })

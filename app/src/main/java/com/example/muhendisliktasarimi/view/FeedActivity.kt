@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.muhendisliktasarimi.adapter.ScoreAdapter
 import com.example.muhendisliktasarimi.databinding.ActivityFeedBinding
 import com.example.muhendisliktasarimi.domain.model.GroupedScore
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -66,7 +67,8 @@ class FeedActivity : AppCompatActivity() {
                 callback(groupedScores)
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this,"Skorlar alınamadı",Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Skorlar alınamadı", Snackbar.LENGTH_SHORT).show()
+
             }
     }
 }

@@ -10,6 +10,7 @@ import com.example.muhendisliktasarimi.MainActivity
 import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.databinding.ActivitySignInBinding
 import com.example.muhendisliktasarimi.databinding.ActivitySolveQuestionBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : AppCompatActivity() {
@@ -20,9 +21,6 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.emailLayout.boxStrokeColor = ContextCompat.getColor(this, R.color.black)
-        binding.passwordLayout.boxStrokeColor = ContextCompat.getColor(this, R.color.black)
 
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -39,12 +37,16 @@ class SignInActivity : AppCompatActivity() {
                 binding.textViewSignUp.visibility = View.GONE
                 firebaseAuth.signInWithEmailAndPassword(email,password)
                     .addOnFailureListener {
-                        if (it.message == "The email address is badly formatted."){
-                            Toast.makeText(this,"Geçerli bir email adresi girin", Toast.LENGTH_SHORT).show()
-                        }else if (it.message == "The supplied auth credential is incorrect, malformed or has expired."){
-                            Toast.makeText(this,"Kullanıcı adı veya şifre hatalı", Toast.LENGTH_SHORT).show()
-                        }else{
-                            Toast.makeText(this,"Hata", Toast.LENGTH_SHORT).show()
+                        when (it.message) {
+                            "The email address is badly formatted." -> {
+                                Snackbar.make(binding.root, "Geçerli bir email adresi girin", Snackbar.LENGTH_SHORT).show()
+                            }
+                            "The supplied auth credential is incorrect, malformed or has expired." -> {
+                                Snackbar.make(binding.root, "Kullanıcı adı veya şifre hatalı", Snackbar.LENGTH_SHORT).show()
+                            }
+                            else -> {
+                                Snackbar.make(binding.root, "Hata: ${it.message}", Snackbar.LENGTH_SHORT).show()
+                            }
                         }
                         binding.linearLayout.visibility = View.VISIBLE
                         binding.textViewSignUp.visibility = View.VISIBLE
@@ -54,27 +56,25 @@ class SignInActivity : AppCompatActivity() {
                     if (it.isSuccessful){
                         binding.progressBar2.visibility = View.GONE
                         binding.textViewSignUp.visibility = View.GONE
-                        Toast.makeText(this,"Giriş yapıldı", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     }else if (it.exception!!.message == "The email address is badly formatted."){
-                        Toast.makeText(this,"Geçerli bir email adresi girin", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, "Geçerli bir email adresi girin", Snackbar.LENGTH_SHORT).show()
                         binding.linearLayout.visibility = View.VISIBLE
                         binding.textViewSignUp.visibility = View.VISIBLE
                     }else if (it.exception!!.message == "The supplied auth credential is incorrect, malformed or has expired."){
-                        Toast.makeText(this,"Kullanıcı adı veya şifre hatalı", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, "Kullanıcı adı veya şifre hatalı", Snackbar.LENGTH_SHORT).show()
                         binding.linearLayout.visibility = View.VISIBLE
                         binding.textViewSignUp.visibility = View.VISIBLE
                     }else{
-                        Toast.makeText(this,"Hata", Toast.LENGTH_SHORT).show()
-                        binding.linearLayout.visibility = View.VISIBLE
+                        Snackbar.make(binding.root, "Boş alanları doldurun", Snackbar.LENGTH_SHORT).show()
                         binding.textViewSignUp.visibility = View.VISIBLE
 
                     }
 
                 }
             }else{
-                Toast.makeText(this,"Boş alanları doldurun", Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Boş alanları doldurun", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

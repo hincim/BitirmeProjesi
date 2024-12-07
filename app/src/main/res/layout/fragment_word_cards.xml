@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="Kelime Kartları"
             app:titleCentered="true"
-            app:titleTextColor="@color/teal_700" />
+            app:titleTextColor="@color/deepBlue" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"

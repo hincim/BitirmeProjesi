@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/card_background"
+        android:background="@drawable/button_gradient_home_page"
         android:elevation="10dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/searchView"
@@ -19,8 +19,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Kelimelerini Ara"
         app:titleCentered="true"
-        app:titleTextColor="@color/white" >
+        app:titleTextColor="@color/white">
+
     </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:src="@drawable/kelimeler"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
@@ -30,11 +51,13 @@
         app:layout_constraintBottom_toTopOf="@+id/card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:elevation="100dp"
@@ -49,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@drawable/card_background"
+            android:background="@drawable/card_border"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="10dp">
@@ -60,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="Kelime Ekle"
-                android:textColor="@color/white"
+                android:textColor="@color/deepBlue"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

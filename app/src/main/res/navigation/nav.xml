@@ -13,8 +13,10 @@
         <action
             android:id="@+id/action_homePageScreen_to_wordAddFragment"
             app:destination="@id/wordAddFragment"
-            app:enterAnim="@anim/enter_animation"
-            app:popExitAnim="@anim/exit_animation" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/commPageScreen"
@@ -29,13 +31,17 @@
         <action
             android:id="@+id/action_toolsPageScreen_to_fragmentWordMeanFragment"
             app:destination="@id/wordMeanFragment"
-            app:enterAnim="@anim/enter_animation"
-            app:popExitAnim="@anim/exit_animation" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_toolsPageScreen_to_weatherInfoFragment"
             app:destination="@id/weatherInfoFragment"
-            app:enterAnim="@anim/enter_animation"
-            app:popExitAnim="@anim/exit_animation" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_toolsPageScreen_to_movieFragment"
             app:destination="@id/movieFragment"
@@ -54,8 +60,10 @@
         <action
             android:id="@+id/action_wordMeanFragment_to_historiesFragment"
             app:destination="@id/historiesFragment"
-            app:enterAnim="@anim/enter_animation"
-            app:popExitAnim="@anim/exit_animation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/wordMeanFragment" />
         <argument
             android:name="searchName"
@@ -110,8 +118,10 @@
         <action
             android:id="@+id/action_quizPageScreen_to_exercisePageScreen"
             app:destination="@id/exercisePageScreen"
-            app:enterAnim="@anim/enter_y_animation"
-            app:popExitAnim="@anim/exit_y_animation" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_quizPageScreen_to_solveQuestionFragment"
             app:destination="@id/solveQuestionFragment"

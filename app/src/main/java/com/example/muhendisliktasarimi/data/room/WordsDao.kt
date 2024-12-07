@@ -12,6 +12,15 @@ interface WordsDao {
     @Insert
     suspend fun insertAll(vararg words: Words): List<Long>
 
+    @Insert
+    suspend fun insert(words: Words): Long
+
+    @Query("SELECT * FROM Words WHERE eng = :englishWord LIMIT 1")
+    suspend fun getWordByEnglish(englishWord: String): Words?
+
+    @Query("DELETE FROM words") // Tüm kelimeleri silmek için
+    suspend fun deleteAllWords()
+
     @Query("SELECT * FROM Words ORDER BY eng ASC")
     suspend fun getAllWords() : List<Words>
 

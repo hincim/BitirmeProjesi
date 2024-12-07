@@ -2,24 +2,24 @@ package com.example.muhendisliktasarimi.view
 
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.muhendisliktasarimi.MainActivity
 import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.databinding.ActivitySolveQuestionBinding
+import com.example.muhendisliktasarimi.domain.model.FalseWords
 import com.example.muhendisliktasarimi.domain.model.Words
 import com.example.muhendisliktasarimi.viewmodel.WordsViewModel
-import com.google.firebase.Timestamp
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -27,8 +27,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.runBlocking
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStreamReader
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+
 
 class SolveQuestionActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySolveQuestionBinding
@@ -43,6 +48,8 @@ class SolveQuestionActivity : AppCompatActivity() {
     private var questionCounter = 0
     private var correctCounter = 0
     private var falseCounter = 0
+    var data = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySolveQuestionBinding.inflate(layoutInflater)
@@ -53,7 +60,8 @@ class SolveQuestionActivity : AppCompatActivity() {
 
         questions = viewModel.getRandomWord()
         allOptions = HashSet()
-
+        readCSVFile()
+        deleteCSVFile()
         uploadQuestion()
         val username = auth.currentUser?.email?.substringBefore('@')
         binding.textViewUserName.text = "Kullanıcı adı: "+username
@@ -226,8 +234,59 @@ class SolveQuestionActivity : AppCompatActivity() {
         }
 
     }
+    private fun deleteCSVFile() {
+        val file = File(filesDir, "failed_words.csv")
+        if (file.exists()) {
+            file.delete() // Dosya her girişte sıfırlanır
+        }
+    }
 
-    private fun uploadQuestion(){
+    private fun readCSVFile() {
+        val file = File(filesDir, "failed_words.csv")
+        if (file.exists()) {
+            file.bufferedReader().useLines { lines ->
+                val wordsList = lines.drop(1).map { line ->
+                    val tokens = line.split(";")
+                    val englishWord = tokens[0]
+                    val turkishWord = tokens[1]
+                    val difficultyLevel = tokens[2].toInt()
+                    FalseWords(englishWord, turkishWord, difficultyLevel)
+                }.toList()
+                wordsList.forEach { words ->
+                    println("İngilizce: ${words.engWord}, Türkçe: ${words.trWord}, Zorluk: ${words.difficultyLevel}")
+                }
+            }
+        } else {
+
+        }
+    }    private fun saveWrongAnswerToCSV() {
+        val file = File(filesDir, "failed_words.csv")
+        val fos = openFileOutput("failed_words.csv", MODE_APPEND)
+
+        try {
+            // Eğer dosya yeni oluşturulduysa başlık ekle
+            if (!file.exists()|| file.length() == 0L) {
+                val header = "English word;Turkish word;Difficulty Level\n"
+                fos.write(header.toByteArray())
+            }
+
+            // Zorluk seviyesini kelimenin uzunluğuna göre belirleme
+            val difficultyLevel = when (correctQuestion.engWord?.length) {
+                in 1..4 -> 1
+                in 5..7 -> 2
+                else -> 3
+            }
+
+            // Kelime verisini ekle
+            val data = "${correctQuestion.engWord};${correctQuestion.trWord};$difficultyLevel\n"
+            fos.write(data.toByteArray())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            fos.close()
+        }
+    }
+    private fun uploadQuestion() {
         binding.buttonAnswer1.setBackgroundResource(R.drawable.rounded_button)
         binding.buttonAnswer2.setBackgroundResource(R.drawable.rounded_button)
         binding.buttonAnswer3.setBackgroundResource(R.drawable.rounded_button)
@@ -250,57 +309,12 @@ class SolveQuestionActivity : AppCompatActivity() {
         allOptions.add(falseOptions[0])
         allOptions.add(falseOptions[1])
         allOptions.add(falseOptions[2])
-        println(allOptions)
 
-
+        // Şıkları güncelle
         binding.buttonAnswer1.text = allOptions.elementAt(0).trWord
         binding.buttonAnswer2.text = allOptions.elementAt(1).trWord
         binding.buttonAnswer3.text = allOptions.elementAt(2).trWord
         binding.buttonAnswer4.text = allOptions.elementAt(3).trWord
-       /* viewModel.randomWords.observe(this, Observer {
-            it?.let {
-
-                questions = it
-                if (questions.size<5){
-                    finish()
-                    Toast.makeText(this,"En az 5 kelime kaydedin", Toast.LENGTH_SHORT).show()
-                 return@Observer
-                }
-                correctQuestion = questions[questionCounter]
-                binding.questionCount.text = "${questionCounter + 1} / ${questions.size}"
-
-                binding.textViewQuestion.text = correctQuestion.engWord
-
-                viewModel.getRandomOptionsWord(correctQuestion.uuid)
-
-            }
-
-        })
-
-        viewModel.randomOptionsWords.observe(this, Observer { res ->
-            res?.let {
-                println("Tüm seçenekler")
-                println(res)
-                println("Soru")
-                println(correctQuestion.engWord)
-                falseOptions = res
-
-                allOptions.add(correctQuestion)
-                allOptions.add(falseOptions[0])
-                allOptions.add(falseOptions[1])
-                allOptions.add(falseOptions[2])
-
-
-                val options = allOptions.shuffled()
-
-                binding.buttonAnswer1.text = options.elementAt(0).trWord
-                binding.buttonAnswer2.text = options.elementAt(1).trWord
-                binding.buttonAnswer3.text = options.elementAt(2).trWord
-                binding.buttonAnswer4.text = options.elementAt(3).trWord
-                println("karıştırılmış")
-                println(options)
-            }
-        })*/
     }
     @RequiresApi(Build.VERSION_CODES.O)
     private fun questionCountControl(view: View){
@@ -347,7 +361,7 @@ class SolveQuestionActivity : AppCompatActivity() {
                     scoreMap.put("userEmail",auth.currentUser?.email.toString())
                     scoreMap.put("date", formattedDateTime)
                     fireStore.collection("Score").add(scoreMap).addOnSuccessListener {
-                        Toast.makeText(this@SolveQuestionActivity,"Skor kaydedildi",Toast.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, "Skor kaydedildi", Snackbar.LENGTH_SHORT).show()
                     }
                     val intent = Intent(this@SolveQuestionActivity,ResultActivity::class.java)
                     intent.putExtra("correctCounter",correctCounter)
@@ -369,14 +383,123 @@ class SolveQuestionActivity : AppCompatActivity() {
         binding.buttonAnswer3.setBackgroundResource(R.drawable.rounded_button)
         binding.buttonAnswer4.setBackgroundResource(R.drawable.rounded_button)
 
-
             if (buttonText == correctAnswer) {
                 correctCounter++
                 binding.correctCount.text = "Doğru: $correctCounter"
                 return true
             } else {
                 falseCounter++
+                println("$correctAnswer fdfdfdfd")
+                println("$buttonText fdfdfdfd")
+
                 binding.falseCount.text = "Yanlış: $falseCounter"
+//                try {
+//                    if (correctQuestion.engWord?.length in 1..4){
+//                        val file = File(filesDir, "failed_words.csv")
+//
+//                        if (!file.exists()) {
+//                            try {
+//                                val fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                                val header = "Ingilizce Kelime"+";"+"Turkcesi"+";"+"Zorluk Seviyesi"+"\n"
+//                                fos.write(header.toByteArray())
+//                                fos.close()
+//                            } catch (e: java.lang.Exception) {
+//                                e.printStackTrace()
+//                            }
+//                            data = correctQuestion.engWord + ";" + correctQuestion.trWord + ";" + 1 + "\n";
+//                            fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                            fos?.write(data.toByteArray())
+//                            fos?.close()
+//                        }else{
+//                            try {
+//                                val fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                                val header = "Ingilizce Kelime"+";"+"Turkcesi"+";"+"Zorluk Seviyesi"+"\n"
+//                                fos.write(header.toByteArray())
+//                                fos.close()
+//
+//
+//                            } catch (e: java.lang.Exception) {
+//                                e.printStackTrace()
+//                            }
+//                            data = correctQuestion.engWord + ";" + correctQuestion.trWord + ";" + 1 + "\n";
+//                            fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                            fos?.write(data.toByteArray())
+//                            fos?.close()
+//                        }
+//
+//
+//                    }else if (correctQuestion.engWord?.length in 5..7){
+//
+//                        val file = File(filesDir, "failed_words.csv")
+//
+//                        if (!file.exists()) {
+//                            try {
+//                                val fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                                val header = "İngilizce Kelime"+";"+"Turkcesi"+";"+"Zorluk Seviyesi"+"\n"
+//                                fos.write(header.toByteArray())
+//                                fos.close()
+//                            } catch (e: java.lang.Exception) {
+//                                e.printStackTrace()
+//                            }
+//                            data = correctQuestion.engWord + ";" + correctQuestion.trWord + ";" + 1 + "\n";
+//                            fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                            fos?.write(data.toByteArray())
+//                            fos?.close()
+//                        }else{
+//                            try {
+//                                val fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                                val header = "Ingilizce Kelime"+";"+"Turkcesi"+";"+"Zorluk Seviyesi"+"\n"
+//                                fos.write(header.toByteArray())
+//                                fos.close()
+//
+//
+//                            } catch (e: java.lang.Exception) {
+//                                e.printStackTrace()
+//                            }
+//                            data = correctQuestion.engWord + ";" + correctQuestion.trWord + ";" + 2 + "\n";
+//                            fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                            fos?.write(data.toByteArray())
+//                            fos?.close()
+//                        }
+//
+//
+//                    }else{
+//
+//                        val file = File(filesDir, "failed_words.csv")
+//
+//                        if (!file.exists()) {
+//                            try {
+//                                val fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                                val header = "İngilizce Kelime"+";"+"Turkcesi"+";"+"Zorluk Seviyesi"+"\n"
+//                                fos.write(header.toByteArray())
+//                                fos.close()
+//                            } catch (e: java.lang.Exception) {
+//                                e.printStackTrace()
+//                            }
+//
+//                            data = correctQuestion.engWord + ";" + correctQuestion.trWord + ";" + 3 + "\n";
+//                            fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                            fos?.write(data.toByteArray())
+//                            fos?.close()
+//                        }else{
+//                            try {
+//                                val fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                                val header = "İngilizce Kelime"+";"+"Turkcesi"+";"+"Zorluk Seviyesi"+"\n"
+//                                fos.write(header.toByteArray())
+//                                fos.close()
+//                            } catch (e: java.lang.Exception) {
+//                                e.printStackTrace()
+//                            }
+//                            data = correctQuestion.engWord + ";" + correctQuestion.trWord + ";" + 3 + "\n";
+//                            fos = openFileOutput("failed_words.csv", MODE_APPEND)
+//                            fos?.write(data.toByteArray())
+//                            fos?.close()
+//                        }
+//                    }
+//                } catch (e: Exception) {
+//                    e.printStackTrace()  // Hataları yakala ve yazdır
+//                }
+                saveWrongAnswerToCSV()
                 return false
             }
 

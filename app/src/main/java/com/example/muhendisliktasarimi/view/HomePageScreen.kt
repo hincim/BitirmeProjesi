@@ -1,7 +1,6 @@
 package com.example.muhendisliktasarimi.view
 
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -15,6 +14,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -28,6 +28,7 @@ import com.example.muhendisliktasarimi.adapter.WordsAdapter
 import com.example.muhendisliktasarimi.databinding.FragmentHomePageScreenBinding
 import com.example.muhendisliktasarimi.domain.model.Words
 import com.example.muhendisliktasarimi.viewmodel.WordsViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class HomePageScreen : Fragment(R.layout.fragment_home_page_screen), SearchView.OnQueryTextListener {
@@ -63,7 +64,6 @@ class HomePageScreen : Fragment(R.layout.fragment_home_page_screen), SearchView.
 
         val binding = FragmentHomePageScreenBinding.bind(view)
         _fragmentBinding = binding
-
         subscribeToObserves()
 
         binding.rv.adapter = wordsAdapter
@@ -91,6 +91,20 @@ class HomePageScreen : Fragment(R.layout.fragment_home_page_screen), SearchView.
             }
 
         },viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        binding.toolbar.apply {
+//            val textDrawable = TextDrawable("Hepsini Sil")
+
+            // Navigation icon olarak TextDrawable ekleyin
+            navigationIcon = ContextCompat.getDrawable(context, R.drawable.delete)
+
+            // Navigation icon'a tıklama işlemi ekleyin
+            setNavigationOnClickListener {
+                viewModel.clearAllWords()
+                wordsAdapter.notifyDataSetChanged()
+            }
+        }
+
     }
 
     override fun onDestroy() {
@@ -130,6 +144,7 @@ class HomePageScreen : Fragment(R.layout.fragment_home_page_screen), SearchView.
             subscribeToObserves()
             wordsAdapter.notifyDataSetChanged()
             dialog.dismiss()
+            Snackbar.make(_fragmentBinding!!.root, "${selectedWords.engWord} silindi", Snackbar.LENGTH_SHORT).show()
         }
 
         btnCancel.setOnClickListener {

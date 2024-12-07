@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.muhendisliktasarimi.MainActivity
 import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.databinding.FragmentCommPageScreenBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -39,7 +40,6 @@ class CommPageScreen : Fragment() {
             firebaseAuth.signOut()
             startActivity(Intent(requireContext(),SignInActivity::class.java))
             finishAffinity(requireActivity())
-            Toast.makeText(requireContext(),"Çıkış yapıldı",Toast.LENGTH_SHORT).show()
         }
         return _comePageScreen.root
     }

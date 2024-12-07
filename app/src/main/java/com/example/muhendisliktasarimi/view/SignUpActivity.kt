@@ -11,6 +11,7 @@ import com.example.muhendisliktasarimi.MainActivity
 import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.databinding.ActivitySignUpBinding
 import com.example.muhendisliktasarimi.databinding.ActivitySolveQuestionBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class SignUpActivity : AppCompatActivity() {
@@ -39,32 +40,31 @@ class SignUpActivity : AppCompatActivity() {
                     binding.linearLayout.visibility = View.GONE
                     firebaseAuth.createUserWithEmailAndPassword(email,password)
                         .addOnFailureListener {
-                            Toast.makeText(this,"Hata", Toast.LENGTH_SHORT).show()
+                            Snackbar.make(binding.root, "Hata", Snackbar.LENGTH_SHORT).show()
                             binding.linearLayout.visibility = View.VISIBLE
                             binding.progressBar3.visibility = View.GONE
                         }
                         .addOnCompleteListener {
                             if (it.isSuccessful){
                                 binding.progressBar3.visibility = View.GONE
-                                Toast.makeText(this,"Kayıt oluşturuldu", Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(this,MainActivity::class.java))
                                 ActivityCompat.finishAffinity(this)
                             }else if(it.exception!!.message == "The email address is already in use by another account."){
-                                Toast.makeText(this,"Aynı hesapla kullanıcı var", Toast.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, "Aynı hesapla kullanıcı var", Snackbar.LENGTH_SHORT).show()
                                 binding.linearLayout.visibility = View.VISIBLE
                             }else if (it.exception!!.message == "The email address is badly formatted."){
-                                Toast.makeText(this,"Geçerli bir email adresi girin", Toast.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, "Geçerli bir email adresi girin", Snackbar.LENGTH_SHORT).show()
                             }else{
-                                Toast.makeText(this,"Hata", Toast.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, "Hata", Snackbar.LENGTH_SHORT).show()
                                 binding.linearLayout.visibility = View.VISIBLE
                             }
                         }
                 }else{
-                    Toast.makeText(this,"Şifreler aynı değil", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "Şifreler aynı değil", Snackbar.LENGTH_SHORT).show()
                 }
 
             }else{
-                Toast.makeText(this,"Boş alanları doldurun", Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Boş alanları doldurun", Snackbar.LENGTH_SHORT).show()
             }
 
         }
