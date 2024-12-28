@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.databinding.ItemWordRowBinding
 import com.example.muhendisliktasarimi.domain.model.Words
+import com.example.muhendisliktasarimi.view.HomePageScreenDirections
 
 class WordsAdapter: RecyclerView.Adapter<WordsAdapter.WordsViewHolder>(){
 
@@ -42,7 +43,8 @@ class WordsAdapter: RecyclerView.Adapter<WordsAdapter.WordsViewHolder>(){
         println(words[position].uuid)
 
         holder.binding.cardRow.setOnClickListener {
-            println(words[position].uuid)
+            Navigation.findNavController(it).navigate(HomePageScreenDirections.actionHomePageScreenToWordUpdateFragment(words[position].trWord!!,words[position].engWord!!,words[position].uuid))
+            println("Tıklanan ${words[position].uuid}")
         }
     }
 

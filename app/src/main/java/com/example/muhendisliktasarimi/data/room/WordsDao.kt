@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.muhendisliktasarimi.domain.model.Words
 
 @Dao
@@ -35,4 +36,8 @@ interface WordsDao {
 
     @Query("SELECT * FROM Words WHERE uuid != :uuid ORDER BY RANDOM() LIMIT 3")
     suspend fun getRandomOptionsWord(uuid: Int): List<Words>
+
+    @Query("UPDATE words SET eng = :engWord, tr = :trWord WHERE uuid = :id")
+    suspend fun updateWordById(id: Int, engWord: String, trWord: String): Int
+
 }

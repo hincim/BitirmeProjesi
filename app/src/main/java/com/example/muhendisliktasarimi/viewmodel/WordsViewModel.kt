@@ -82,6 +82,14 @@ class WordsViewModel(application: Application): BaseViewModel(application) {
        }
     }
 
+    fun updateWordById(id: Int, engWord: String, trWord: String){
+        launch {
+            val dao = AppDatabase(getApplication()).wordsDao()
+            dao.updateWordById(id,engWord,trWord)
+            getDataFromSQLite()
+        }
+    }
+
     fun getRandomWord(): Deferred<List<Words>> {
         return CoroutineScope(Dispatchers.Default).async {
             val dao = AppDatabase(getApplication()).wordsDao()

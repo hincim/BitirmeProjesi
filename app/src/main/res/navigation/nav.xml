@@ -17,6 +17,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homePageScreen_to_wordUpdateFragment"
+            app:destination="@id/wordUpdateFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
     <fragment
         android:id="@+id/commPageScreen"
@@ -148,5 +155,20 @@
             app:argType="integer" />
 
 
+    </fragment>
+    <fragment
+        android:id="@+id/wordUpdateFragment"
+        android:name="com.example.muhendisliktasarimi.view.WordUpdateFragment"
+        android:label="fragment_word_update"
+        tools:layout="@layout/fragment_word_update" >
+        <argument
+            android:name="word_tr"
+            app:argType="string" />
+        <argument
+            android:name="word_eng"
+            app:argType="string" />
+        <argument
+            android:name="word_id"
+            app:argType="integer" />
     </fragment>
 </navigation>
