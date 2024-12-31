@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="277dp"
-        android:layout_height="375dp"
-        android:src="@drawable/word_hive_2"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/app_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

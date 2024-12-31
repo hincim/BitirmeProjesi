@@ -9,10 +9,10 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:elevation="10dp"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,16 +27,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+<!--
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="120dp"
             android:layout_height="70dp"
             android:elevation="10dp"
-            android:src="@drawable/app_logo_app"
+            android:src="@drawable/app_logo9"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="parent" />
+-->
 
         <ImageView
             android:id="@+id/imageView2"
@@ -44,7 +47,7 @@
             android:layout_height="300dp"
             android:layout_marginBottom="56dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/word_hive_2"
+            android:src="@drawable/app_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
@@ -108,16 +111,17 @@
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:background="@drawable/rounded_corner"
             android:id="@+id/buttonSignOut"
-            android:textSize="13sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Çıkış Yap"
+            android:layout_marginStart="156dp"
+            android:background="@drawable/rounded_corner"
             android:padding="15dp"
+            android:text="Çıkış Yap"
             android:textColor="@color/deepBlue"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="444dp" />
+            tools:layout_editor_absoluteY="472dp" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
