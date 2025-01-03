@@ -56,7 +56,8 @@ class FeedActivity : AppCompatActivity() {
                     if (email == auth.currentUser?.email){
                         email = "Siz"
                     }else{
-                        email = "Kullanıcı Adı: $email"
+                        val emailCapitalizeFirstLetter = capitalizeFirstLetter(email)
+                        email = "Kullanıcı Adı: $emailCapitalizeFirstLetter"
                     }
                     val scoresList = groupedScoresMap
                         .getOrPut(email) { mutableListOf() }
@@ -71,4 +72,7 @@ class FeedActivity : AppCompatActivity() {
 
             }
     }
+}
+fun capitalizeFirstLetter(word: String): String {
+    return word.replaceFirstChar { it.uppercase() }
 }

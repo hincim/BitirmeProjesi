@@ -1,13 +1,22 @@
 package com.example.muhendisliktasarimi.view
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.muhendisliktasarimi.R
 import com.example.muhendisliktasarimi.databinding.FragmentToolsPageScreenBinding
+import com.example.muhendisliktasarimi.domain.model.Words
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 
@@ -36,7 +45,7 @@ class ToolsPageScreen : Fragment() {
         _toolsPageScreen.cardMovie.setOnClickListener {
             val file = File(requireContext().filesDir, "failed_words.csv")
             if (!file.exists()) {
-                Snackbar.make(it.rootView, "Yanlış cevap bulunamadı", Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Yanlış cevap bulunamadı",Toast.LENGTH_SHORT).show()
             }else{
                 startActivity(Intent(requireContext(), AIActivity::class.java))
             }

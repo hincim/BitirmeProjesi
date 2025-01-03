@@ -55,7 +55,7 @@ class SignUpActivity : AppCompatActivity() {
                             }else if (it.exception!!.message == "The email address is badly formatted."){
                                 Snackbar.make(binding.root, "Geçerli bir email adresi girin", Snackbar.LENGTH_SHORT).show()
                             }else{
-                                Snackbar.make(binding.root, "Hata", Snackbar.LENGTH_SHORT).show()
+                                Snackbar.make(binding.root, "Hata, internet bağlantınızı kontrol edin", Snackbar.LENGTH_SHORT).show()
                                 binding.linearLayout.visibility = View.VISIBLE
                             }
                         }

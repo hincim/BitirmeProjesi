@@ -78,7 +78,7 @@ class AIActivity : AppCompatActivity() {
 
                     val generativeModel = GenerativeModel(
                         modelName = "gemini-1.5-flash",
-                        apiKey = "Constants.AI_API_KEY"
+                        apiKey = Constants.AI_API_KEY
                     )
 
                     val response = generativeModel.generateContent(sentence)

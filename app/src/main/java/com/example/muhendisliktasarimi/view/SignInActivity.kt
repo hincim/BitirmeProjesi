@@ -67,7 +67,7 @@ class SignInActivity : AppCompatActivity() {
                         binding.linearLayout.visibility = View.VISIBLE
                         binding.textViewSignUp.visibility = View.VISIBLE
                     }else{
-                        Snackbar.make(binding.root, "Boş alanları doldurun", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, "Hata, internet bağlantınızı kontrol edin", Snackbar.LENGTH_SHORT).show()
                         binding.textViewSignUp.visibility = View.VISIBLE
 
                     }
